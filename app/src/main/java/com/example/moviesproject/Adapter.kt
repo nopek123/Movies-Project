@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.moviesproject.databinding.LayoutItemMovieBinding
+import com.example.moviesproject.model.MovieModel
 import java.util.Collections.emptyList
 
 class Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
@@ -48,10 +49,10 @@ class Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind(movieModel: MovieModel) {
 
-            movieModelName.text = movieModel.name
-            movieModelTimeMovie.text = movieModel.timeMovie
-            movieModelGenre.text = movieModel.genre
-            movieModelDescription.text = movieModel.description
+            movieModelName.text = movieModel.title
+            movieModelTimeMovie.text = movieModel.releaseDate
+//            movieModelGenre.text = movieModel.genre
+            movieModelDescription.text = movieModel.overview
 
             val requestOptions = RequestOptions
                 .placeholderOf(R.drawable.ic_launcher_background)
@@ -59,7 +60,7 @@ class Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             Glide.with(itemView.context)
                 .applyDefaultRequestOptions(requestOptions)
-                .load(movieModel.imgUrl)
+                .load(movieModel.posterPath)
                 .into(movieModelImg)
 
         }
