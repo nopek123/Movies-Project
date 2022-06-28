@@ -1,27 +1,25 @@
 package com.example.moviesproject
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import kotlinx.android.synthetic.main.res_item_model.view.*
+import com.example.moviesproject.databinding.LayoutItemMovieBinding
+import java.util.Collections.emptyList
 
+class Adapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
-class Adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-
-    private var items: List<MovieModel> = ArrayList()
+    private var items: List<MovieModel> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return MovieViewHolder(
-            LayoutInflater.from(parent.context)
-                .inflate(R.layout.res_item_model, parent, false),
-        )
+        val binding =
+            LayoutItemMovieBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return MovieViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder){
+        when (holder) {
             is MovieViewHolder -> {
                 holder.bind(items[position])
             }
@@ -37,17 +35,18 @@ class Adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    class MovieViewHolder constructor(
-        itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class MovieViewHolder(
+        binding: LayoutItemMovieBinding
+    ) : RecyclerView.ViewHolder(binding.root) {
 
-        private val movieModelName = itemView.input_name
-        private val movieModelTimeMovie = itemView.input_timeMovie
-        private val movieModelGenre = itemView.input_genre
-        private val movieModelDescription = itemView.input_description
-        private val movieModelImg = itemView.profile_movie
+        private val movieModelName = binding.inputName
+        private val movieModelTimeMovie = binding.inputTimeMovie
+        private val movieModelGenre = binding.inputGenre
+        private val movieModelDescription = binding.inputDescription
+        private val movieModelImg = binding.profileMovie
 
 
-        fun bind(movieModel: MovieModel){
+        fun bind(movieModel: MovieModel) {
 
             movieModelName.text = movieModel.name
             movieModelTimeMovie.text = movieModel.timeMovie
@@ -65,5 +64,4 @@ class Adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         }
     }
-
 }

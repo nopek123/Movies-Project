@@ -14,7 +14,6 @@ class HomeFragment : Fragment() {
     private lateinit var adapter: Adapter
     private lateinit var recyclerview: RecyclerView
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
@@ -24,8 +23,7 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initView(view)
-        initRecycleView()
+        initRecycleView(view)
         loadMovieListFrom()
     }
 
@@ -34,14 +32,10 @@ class HomeFragment : Fragment() {
         this.adapter.setDataSet(dataSource)
     }
 
-    private fun initRecycleView() {
+    private fun initRecycleView(view: View) {
         this.adapter = Adapter()
+        recyclerview = view.findViewById(R.id.fragment_recycle_view)
         recyclerview.layoutManager = LinearLayoutManager(requireContext())
         recyclerview.adapter = this.adapter
     }
-
-    private fun initView(view: View) {
-        recyclerview = view.findViewById<RecyclerView>(R.id.fragment_recycle_view)
-    }
-
 }
